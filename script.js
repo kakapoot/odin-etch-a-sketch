@@ -24,12 +24,34 @@ function initializeCanvas() {
 }
 
 function draw(pixel) {
-    pixel.setAttribute('style', `background-color: ${penColor}`);
+    if (isRainbow) {
+        // code for random color selection from https://www.paulirish.com/2009/random-hex-color-code-snippets/
+        let randomColor = `#${(Math.random().toString(16) + "000000").slice(2, 8)}`
+        pixel.setAttribute('style', `background-color: ${randomColor}`);
+        // set pen hover to random color
+        root.style.setProperty('--pen-color', randomColor);
+    }
+    else
+        pixel.setAttribute('style', `background-color: ${penColor}`);
+}
+
+// ensure only one mode (eraser, rainbow, pen) is selected at any time
+function untoggleOthers(button) {
+    toggledButtons = document.querySelectorAll('.toggled')
+    toggledButtons.forEach((toggledButton) => {
+        if (toggledButton != button) {
+            toggledButton.classList.toggle('toggled');
+            if (toggledButton == rainbowButton)
+                isRainbow = !isRainbow;
+        }
+    });
 }
 
 let penColor;
 let size;
 let pixels;
+let isRainbow = false;
+
 const slider = document.querySelector('.slider');
 
 const root = document.querySelector(':root');
@@ -38,10 +60,10 @@ initializeCanvas();
 
 // logic for drawing on canvas
 let mouseDown = false;
-document.onmousedown = () => (mouseDown = true);
-document.onmouseup = () => (mouseDown = false);
-// stop pointer from dragging while on canvas
-canvas.ondragstart = () => {return false;};
+document.body.onmousedown = () => (mouseDown = true);
+document.body.onmouseup = () => (mouseDown = false);
+// stops mouse from dragging while on canvas
+canvas.ondragstart = () => {return false;} 
 canvas.addEventListener('mouseover', (e) => {
     if (e.target.className === "pixel") {
         if (mouseDown)
@@ -59,9 +81,7 @@ clearButton.addEventListener('click', () => {
 // change pen color using on color picker values
 const colorPicker = document.querySelector('.color');
 colorPicker.addEventListener('input', () => {
-    // switch out of eraser mode when selecting pen
-    if (eraserButton.classList.contains('toggled'))
-        eraserButton.classList.toggle('toggled');
+    untoggleOthers(colorPicker);
     penColor = colorPicker.value;
     // change pen hover color
     root.style.setProperty('--pen-color', penColor);
@@ -71,6 +91,7 @@ colorPicker.addEventListener('input', () => {
 let previousColor;
 const eraserButton = document.querySelector('.eraser');
 eraserButton.addEventListener('click', () => {
+    untoggleOthers(eraserButton);
     eraserButton.classList.toggle('toggled');
     if (eraserButton.classList.contains('toggled')) {
         // temporarily store previous pen color
@@ -93,4 +114,13 @@ slider.addEventListener('input', () => {
     createCanvas();
 });
 
-// TODO: save image function?
+// rainbow toggle
+const rainbowButton = document.querySelector('.rainbow');
+rainbowButton.addEventListener('click', () => {
+    untoggleOthers(rainbowButton);
+    rainbowButton.classList.toggle('toggled');
+    isRainbow = !isRainbow;
+    // reset pen hover to previous color
+    if (isRainbow)
+        root.style.setProperty('--pen-color', penColor);
+});

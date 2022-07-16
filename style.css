@@ -77,5 +77,20 @@ body {
 }
 
 .toggled {
-    background-color: lightgrey;
+    background-color: grey;
+}
+
+.rainbow {
+    animation: rainbow-animation 10s infinite;
+}
+
+@keyframes rainbow-animation {
+    0%  {color: red;}
+    15% {color:orange;}
+    30% {color:yellowgreen;}
+    45% {color:green;}
+    60% {color: blue;}
+    75% {color: purple;}
+    90% {color: violet;}
+    100%  {color: red;}
 }
