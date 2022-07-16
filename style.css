@@ -1,8 +1,10 @@
+/* TODO: fix larger/mobile resolutions */
+
 :root {
     --pen-color: black;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
-/* TODO: fix larger resolutions */
 body {
     margin: 0;
     display: flex;
@@ -17,8 +19,8 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 2vw;
-    flex: 1;
     margin: 2vw auto;
+    background-color: #ff0266;
 }
 
 .option {
@@ -31,10 +33,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: #0336ff;
     color: white;
     height: 4vw;
     flex-shrink: 0;
+}
+
+.header {
+    font-size: 2vw; 
 }
 
 .options {
@@ -44,6 +50,18 @@ body {
     align-items: center;
     text-align: center;
     gap: 2vw;
+}
+
+.option {
+    background-color: #ffde03;
+    border: none;
+    border-radius: 0.2vw;
+    font-size: 1vw;
+}
+
+.options button:hover {
+    background-color: black;
+    color: white;
 }
 
 .canvas {
@@ -93,4 +111,28 @@ body {
     75% {color: purple;}
     90% {color: violet;}
     100%  {color: red;}
+}
+
+.pepe {
+    width: 16vw;
+    height: auto;
+    position: absolute;
+    z-index: -1;
+    right: 11vw;
+    animation: pepe-animation 8s infinite;
+    transition: ease-in-out;
+}
+
+@keyframes pepe-animation {
+    0% {
+        transform: rotate(90deg);
+    }
+
+    20% {
+        transform: rotate(90deg) translateY(14vw);
+    }
+
+    100% {
+        transform: rotate(90deg);
+    }
 }
