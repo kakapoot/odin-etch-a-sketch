@@ -18,8 +18,8 @@ function removeCanvas() {
 }
 
 function initializeCanvas() {
-    penColor = 'black';
-    size = 64;
+    penColor = getComputedStyle(root).getPropertyValue('--pen-color');
+    size = slider.value;
     createCanvas();
 }
 
@@ -30,6 +30,9 @@ function draw(pixel) {
 let penColor;
 let size;
 let pixels;
+const slider = document.querySelector('.slider');
+
+const root = document.querySelector(':root');
 const canvas = document.querySelector('.canvas');
 initializeCanvas();
 
@@ -49,24 +52,45 @@ canvas.addEventListener('mouseover', (e) => {
 // clear canvas
 const clearButton = document.querySelector('.clear');
 clearButton.addEventListener('click', () => {
-    pixels.forEach((pixel) => {
-        pixel.setAttribute('style', 'background-color: white;');
-    });
+    removeCanvas();
+    createCanvas();
 });
 
-// change pen color
-const root = document.querySelector(':root');
-const colorButton = document.querySelector('.color');
-colorButton.addEventListener('click', () => {
-    penColor = `rgb(${prompt("r,g,b")})`;
+// change pen color using on color picker values
+const colorPicker = document.querySelector('.color');
+colorPicker.addEventListener('input', () => {
+    // switch out of eraser mode when selecting pen
+    if (eraserButton.classList.contains('toggled'))
+        eraserButton.classList.toggle('toggled');
+    penColor = colorPicker.value;
     // change pen hover color
     root.style.setProperty('--pen-color', penColor);
 });
 
+// eraser toggle
+let previousColor;
+const eraserButton = document.querySelector('.eraser');
+eraserButton.addEventListener('click', () => {
+    eraserButton.classList.toggle('toggled');
+    if (eraserButton.classList.contains('toggled')) {
+        // temporarily store previous pen color
+        previousColor = penColor;
+        penColor = '#FFFFFF';
+    }
+    else
+        penColor = previousColor;
+    root.style.setProperty('--pen-color', penColor);
+});
+
 // change canvas size
-const sizeButton = document.querySelector('.size');
-sizeButton.addEventListener('click', () => {
-    size = prompt("canvas size");
+const sizeDisplay = document.querySelector('.size p');
+slider.addEventListener('input', () => {
+    size = slider.value;
+    sizeDisplay.textContent = `size: ${size} x ${size}`;
+    if (slider.value == 69)
+        sizeDisplay.textContent = `nice: ${size} x ${size}`;
     removeCanvas();
     createCanvas();
 });
+
+// TODO: save image function?
