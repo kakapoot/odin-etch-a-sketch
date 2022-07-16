@@ -1,0 +1,36 @@
+:root {
+    --pen-color: black;
+}
+
+body {
+    background-color: grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.canvas {
+    padding: 5vw;
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    height: 40vw;
+}
+
+.row {
+    display: flex;
+    flex: auto;
+}
+
+.pixel {
+    flex: auto;
+    flex-shrink: 0;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin: -1px;
+}
+
+.pixel:hover {
+    background-color: var(--pen-color);
+}
