@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=VT323&display=swap');
+
 :root {
-    --pen-color: black;
+    --pen-color: #000000;
     --color-1: #ff0266;
     --color-2: #0336ff;
     --color-3: #ffde03;
-    --color-dark: black;
-    --color-light: white;
+    --color-dark: #000000;
+    --color-light: #ffffff;
 }
 
 html,
@@ -15,45 +17,44 @@ body {
 }
 
 body {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'VT323', sans-serif;
+    font-size: 1.2vw;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    font-size: 1vw;
 }
 
 .header, 
 .footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: var(--color-2);
     color: var(--color-light);
     padding: 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .header {
-    font-size: 2vw; 
+    font-size: 3vw; 
 }
 
 .content {
     padding-right: 4vw;
-    background-color: grey;
+    margin: 2vw auto;
+    border-radius: 2vw;
+    background-color: var(--color-1);
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 2vw;
-    margin: 2vw auto;
-    background-color: var(--color-1);
 }
 
 .canvas {
     margin: 4vw;
-    display: flex;
-    flex-direction: column;
     width: 30vw;
     height: 30vw;
     cursor: none;
+    display: flex;
+    flex-direction: column;
 }
 
 .row {
@@ -62,10 +63,10 @@ body {
 }
 
 .pixel {
+    background-color: var(--color-light);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     flex: auto;
     flex-shrink: 0;
-    background-color: white;
-    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .pixel:hover {
@@ -74,11 +75,11 @@ body {
 }
 
 .options {
+    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
     gap: 2vw;
 }
 
@@ -90,14 +91,15 @@ body {
 .option, 
 .size {
     width: 8vw;
-    height: 4vw;
+    height: 3vw;
 }
 
 .option {
+    font: inherit;
+    font-size: 1.4vw;
     background-color: var(--color-3);
     border: none;
     border-radius: 0.2vw;
-    font-size: 1vw;
 }
 
 .size {
@@ -110,7 +112,7 @@ body {
     margin: 0;
 }
 
-.toggled {
+.selected {
     background-color: var(--color-dark);
     color: var(--color-light);
 }
@@ -144,4 +146,15 @@ body {
     70% {transform: rotate(90deg);}
     90% {transform: rotate(90deg);}
     100%{transform: rotate(90deg) translateY(14vw);}
+}
+
+.github-icon {
+    width: 2vw;
+    height: 2vw;
+    transition: 0.4s;
+}
+
+.github-icon:hover,
+.github-icon:focus {
+    transform: scale(1.4);
 }
