@@ -1,15 +1,39 @@
-/* TODO: fix larger/mobile resolutions */
-
 :root {
     --pen-color: black;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    --color-1: #ff0266;
+    --color-2: #0336ff;
+    --color-3: #ffde03;
+    --color-dark: black;
+    --color-light: white;
+}
+
+html,
+body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
 }
 
 body {
-    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    font-size: 1vw;
+}
+
+.header, 
+.footer {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    background-color: var(--color-2);
+    color: var(--color-light);
+    padding: 1vw;
+}
+
+.header {
+    font-size: 2vw; 
 }
 
 .content {
@@ -20,48 +44,7 @@ body {
     align-items: center;
     border-radius: 2vw;
     margin: 2vw auto;
-    background-color: #ff0266;
-}
-
-.option {
-    width: 8vw;
-    height: 4vw;
-}
-
-.header, 
-.footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #0336ff;
-    color: white;
-    height: 4vw;
-    flex-shrink: 0;
-}
-
-.header {
-    font-size: 2vw; 
-}
-
-.options {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    gap: 2vw;
-}
-
-.option {
-    background-color: #ffde03;
-    border: none;
-    border-radius: 0.2vw;
-    font-size: 1vw;
-}
-
-.options button:hover {
-    background-color: black;
-    color: white;
+    background-color: var(--color-1);
 }
 
 .canvas {
@@ -90,16 +73,50 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.8);
 }
 
+.options {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    gap: 2vw;
+}
+
+.options button:hover {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+}
+
+.option, 
+.size {
+    width: 8vw;
+    height: 4vw;
+}
+
+.option {
+    background-color: var(--color-3);
+    border: none;
+    border-radius: 0.2vw;
+    font-size: 1vw;
+}
+
+.size {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .size p {
     margin: 0;
 }
 
 .toggled {
-    background-color: grey;
+    background-color: var(--color-dark);
+    color: var(--color-light);
 }
 
 .rainbow {
-    animation: rainbow-animation 10s infinite;
+    animation: rainbow-animation 8s infinite;
 }
 
 @keyframes rainbow-animation {
@@ -110,7 +127,7 @@ body {
     60% {color: blue;}
     75% {color: purple;}
     90% {color: violet;}
-    100%  {color: red;}
+    100%{color: red;}
 }
 
 .pepe {
@@ -119,20 +136,12 @@ body {
     position: absolute;
     z-index: -1;
     right: 11vw;
-    animation: pepe-animation 8s infinite;
-    transition: ease-in-out;
+    animation: pepe-animation 10s infinite ease-in-out;
 }
 
 @keyframes pepe-animation {
-    0% {
-        transform: rotate(90deg);
-    }
-
-    20% {
-        transform: rotate(90deg) translateY(14vw);
-    }
-
-    100% {
-        transform: rotate(90deg);
-    }
+    0%  {transform: rotate(90deg) translateY(14vw);}
+    70% {transform: rotate(90deg);}
+    90% {transform: rotate(90deg);}
+    100%{transform: rotate(90deg) translateY(14vw);}
 }

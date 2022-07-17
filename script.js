@@ -108,6 +108,7 @@ const sizeDisplay = document.querySelector('.size p');
 slider.addEventListener('input', () => {
     size = slider.value;
     sizeDisplay.textContent = `size: ${size} x ${size}`;
+    // hehe
     if (slider.value == 69)
         sizeDisplay.textContent = `nice: ${size} x ${size}`;
     removeCanvas();
